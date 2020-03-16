@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form id="form1" action="http://localhost:8080/" method="post">
+    用户：<input type="text" name="user" /><br>
+    密码：<input type="password" name="pass" /><br>
+    <input type="file" name="file"><br>
+    <input type="submit" value="提交">
+</form>
+</body>
+<script src="js/jquery.js" charset="utf-8"></script>
+<script>
+    // xhr.open("post", "http://localhost:8080/", true);
+    $("#form1").on("submit", function(){
+        let formData = new FormData(this);
+        $.ajax({
+            url: this.action,
+            type: this.method,
+            data: formData,
+            processData: false, //不要处理数据，给什么就传什么
+            contentType: false, //不要更改contentType
+        }).then(res => {
+            alert("成功");
+        }, res => {
+            alert("失败");
+        })
+    })
+</script>
+</html>
